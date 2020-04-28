@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from taggit.managers import TaggableManager
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -10,6 +11,7 @@ class Post(models.Model):
     image = models.ImageField(null=True, blank=True)
     publish = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
+    tags = TaggableManager()
 
     def __str__(self):
         return self.title
