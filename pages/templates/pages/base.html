@@ -1,11 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/pages.css' %}">
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
-    {% block content %}
-    {% endblock %}
+    <header>
+      <h2>Info Junk</h2>
+    </header>
+    <div class="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div class="side_bar">
+
+    </div>
+    <footer>
+
+    </footer>
   </body>
 </html>

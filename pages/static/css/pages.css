@@ -1,0 +1,16 @@
+header {
+  background-color:  #81fce0;
+  width: 100%;
+  height: 65px;
+  padding: 3px;
+  margin-bottom: 30px;
+}
+
+header h2 {
+  text-align: center, left;
+}
+
+.content {
+  border: 2px solid  #c4f8eb;
+  margin: 10px;
+}
