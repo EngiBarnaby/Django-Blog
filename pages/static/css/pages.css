@@ -1,3 +1,7 @@
+html {
+  background-color:   #f7f7f7 ;
+}
+
 header {
   background-color:  #81fce0;
   width: 100%;
@@ -11,6 +15,43 @@ header h2 {
 }
 
 .content {
+  width: 70%;
+  min-height: 400px;
   border: 2px solid  #c4f8eb;
   margin: 10px;
+  padding: 10px;
+  overflow: hidden;
+  background-color: #fafafa
+}
+
+.posts {
+  margin: 15px auto;
+  width: 90%;
+  border: 2px solid red;
+  padding: 10px;
+}
+
+.posts h3 {
+  margin-left: 30%;
+}
+
+.tags a{
+  background-color:  #d3e5e0;
+  margin: 2px;
+  padding: 4px;
+  text-decoration: none;
+  color:   #00b487 ;
+  border-radius: 7px;
+}
+
+.tags a:link {
+    text-decoration: none;
+    color:   #00b487  ;
+}
+.tags a:visited {
+  text-decoration: none;
+  color:   #00b487 ;
+}
+.tags a:active {
+  color:   #00b487  ;
 }
