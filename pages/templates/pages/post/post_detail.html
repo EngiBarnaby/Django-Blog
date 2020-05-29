@@ -1,0 +1,19 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+  <div class="container-fluid content-body">
+    <div class="row">
+      <div class="col-8 offset-md-3 mt-4">
+        <div class="container post-header mb-4">
+          <h1>{{ post.title }}</h1>
+        </div>
+        {% for paragraph in post.paragraphs.all %}
+          <h4 class="font-weight-bold">{{ paragraph.subtitle }}</h4>
+          <p class="font-weight-normal">{{ paragraph.subtext }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
