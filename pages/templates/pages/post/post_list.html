@@ -9,7 +9,7 @@
           {% with paragraph=post.paragraphs.first %}
           <div class="container mt-4" id="post-item">
             <a href="{% url 'post:post_detail' slug=post.slug %}">{{ post.title }}</a>
-            <p>{{ paragraph.subtext|truncatewords:42 }}</p>
+            <p>{{ paragraph.subtext|truncatewords:42|safe }}</p>
             <p>Опубликовано {{ post.publish }}. Автор {{ post.author }}</p>
           </div>
           {% endwith %}

@@ -23,7 +23,7 @@
         </div>
         {% for paragraph in post.paragraphs.all %}
           <h4 class="font-weight-bold" id="{{ paragraph.subtitle }}">{{ paragraph.subtitle }}</h4>
-          <p class="font-weight-normal">{{ paragraph.subtext }}</p>
+          <p class="font-weight-normal">{{ paragraph.subtext|safe }}</p>
         {% endfor %}
       </div>
     </div>
