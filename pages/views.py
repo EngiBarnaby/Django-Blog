@@ -8,7 +8,7 @@ from django.forms.models import modelform_factory
 
 def post_list(request):
     all_post = Post.objects.all()
-    pages = Paginator(all_post, 2)
+    pages = Paginator(all_post, 8)
 
     if "page" in request.GET:
         page_num = request.GET['page']
@@ -53,6 +53,11 @@ def post_detail(request, slug):
     post = Post.objects.get(slug__iexact=slug)
     return render(request, "pages/post/post_detail.html", {"post" : post})
 
+
+def post_delete(request, slug):
+    article = Post.objects.get(slug__iexact=slug)
+    article.delete()
+    return redirect("post:post_list")
 
 class PostUpdate(View):
     post = None

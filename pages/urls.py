@@ -8,5 +8,6 @@ urlpatterns = [
     path("<slug:slug>", post_detail, name="post_detail"),
     path("create/", post_create, name="post_create"),
     path("update/<slug:slug>", post_update, name="post_update"),
-    path("update2/<slug:slug>", PostUpdate.as_view(), name="post_update2"),
+    path('delete/<slug:slug>', post_delete, name="post_delete"),
+    # path("update2/<slug:slug>", PostUpdate.as_view(), name="post_update2"),
 ]

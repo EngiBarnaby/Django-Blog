@@ -13,7 +13,7 @@ class Post(models.Model):
     image = models.ImageField(null=True, blank=True)
     publish = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
 
     def __str__(self):
