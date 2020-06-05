@@ -8,6 +8,8 @@ body, html {
    background-color: #f2f2e2;
 }
 
+
+
 .footer {
     padding: 2.5rem 0;
     color: #999;
@@ -15,9 +17,10 @@ body, html {
     background-color: #e9dfff;
     border-top: .05rem solid #e5e5e5;
     width: 100%;
-    bottom: 0;
     display: block;
 }
+
+
 
 .content {
   background-color: #f2f2e2;

@@ -1,0 +1,22 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+  <h1>Войти</h1>
+    {% if form.errors %}
+      <p>
+        Данные некорректны. Попробуйте снова.
+      </p>
+    {% else %}
+    <p>Введите данные</p>
+    {% endif %}
+    <div class="login-form" action="{% url 'account:login' %}">
+      <form action="{% url 'account:login' %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <p><input type="submit" value="Log-in"></p>
+      </form>
+    </div>
+{% endblock %}
