@@ -1,0 +1,78 @@
+{% extends "pages/base.html" %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <div class="container h-100 mt-4">
+    <div class="d-flex justify-content-center h-100">
+      <div class="user_card">
+        <div class="d-flex justify-content-center mb-4  ">
+          <h3 id="form-title">Регистрация аккаунта</h3>
+        </div>
+        <div class="d-flex justify-content-center form_container">
+
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="input-group mb-2">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+              </div>
+              <!-- <input type="text" name="username" class="form-control py-2 border-left-0 border" placeholder="Имя аккаунта"> -->
+              {{form.username}}
+            </div>
+            <div class="input-group mb-2">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+              </div>
+              <!-- <input type="email" name="username" class="form-control py-2 border-left-0 border" placeholder="Email"> -->
+              {{form.email}}
+            </div>
+            <div class="input-group mb-2">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <!-- <input type="password" name="username" class="form-control py-2 border-left-0 border" placeholder="Пароль"> -->
+              {{form.password1}}
+            </div>
+            <div class="input-group mb-2">
+              <div class="input-group-append">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <!-- <input type="password" name="username" class="form-control py-2 border-left-0 border" placeholder="Повторите пароль"> -->
+              {{form.password2}}
+            </div>
+              <div class="d-flex justify-content-center mt-3">
+                <input class="btn btn-primary" type="submit" value="Зарегистрировать">
+              </div>
+          </form>
+        </div>
+
+        <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Вы уже зарегистрированы? <a href="#" class="ml-2">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script>
+  						/* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+  		//We start indexing at one because CSRF_token is considered and input field
+  		 */
+
+  		//Query All input fields
+  		var form_fields = document.getElementsByTagName('input')
+  		form_fields[1].placeholder='Имя аккаунта..';
+  		form_fields[2].placeholder='Email..';
+  		form_fields[3].placeholder='Пароль...';
+  		form_fields[4].placeholder='Повторите пароль...';
+
+
+  		for (var field in form_fields){
+  			form_fields[field].className += ' form-control'
+  		}
+  	</script>
+{% endblock %}

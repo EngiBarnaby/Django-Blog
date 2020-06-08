@@ -6,8 +6,10 @@ from .forms import PostForm
 from django.views.generic.base import View
 from django.forms.models import modelform_factory
 
+
 def post_list(request):
     all_post = Post.objects.all()
+    categories = Category.objects.all()
     pages = Paginator(all_post, 8)
 
     if "page" in request.GET:
@@ -17,7 +19,7 @@ def post_list(request):
 
     page = pages.get_page(page_num)
 
-    context = {'all_post' : page.object_list, 'page' : page}
+    context = {'all_post' : page.object_list, 'page' : page, "categories" : categories}
     return render(request, "pages/post/post_list.html", context)
 
 def post_create(request):

@@ -1,0 +1,17 @@
+{% extends "pages/base.html" %}s
+
+{% block title %}Успех{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <h1 class="display-4">Регистрация успешно завершена.</h1>
+  <p class="lead">Вы можете войти в аккaунт</p>
+  <!-- <hr class="my-4">
+  <p>Использются служебные классы для типографики и расстояния содержимого в контейнере большего размера.</p> -->
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'account:login' %}" role="button">Войти</a>
+  </p>
+</div>
+
+{% endblock %}

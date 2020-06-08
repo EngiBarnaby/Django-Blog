@@ -8,6 +8,25 @@ body, html {
    background-color: #f2f2e2;
 }
 
+body, wrapper {
+   min-height:100vh;
+}
+
+/* .blog-header {
+} */
+
+#categories {
+      line-height: 1;
+      border-top: 1px solid #e5e5e5;
+}
+
+.title-brand  {
+  font-size: 50px;
+}
+
+.navbar-brand a {
+  color: red;
+}
 
 
 .footer {
@@ -20,7 +39,9 @@ body, html {
     display: block;
 }
 
-
+.flex-fill {
+   flex:1 1 auto;
+}
 
 .content {
   background-color: #f2f2e2;
@@ -39,9 +60,9 @@ body, html {
 }
 
 
- li {
+ /* li {
   list-style: none;
-}
+} */
 
 .post-nav a {
   color:   #686865;
@@ -67,4 +88,15 @@ body, html {
   font-size: 30px;
   font-weight: 800;
   font-family: 'Roboto', sans-serif;
+}
+
+#post-item a {
+  color : #031b4e;
+}
+
+.form-account {
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+    border: 4px double black;
 }

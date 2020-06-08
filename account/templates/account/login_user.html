@@ -1,0 +1,44 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+  <div class="container h-100 mt-4">
+  <div class="d-flex justify-content-center h-100">
+    <div class="user_card">
+      <div class="d-flex justify-content-center mb-4  ">
+        <h3 id="form-title">Вход в аккаунт</h3>
+      </div>
+      <div class="d-flex justify-content-center form_container">
+
+        <form method="POST" action="">
+          {% csrf_token %}
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+            </div>
+            <input type="text" name="username" class="form-control py-2 border-left-0 border" placeholder="Имя аккаунта">
+            <!-- {{form.username}} -->
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="password" name="password" class="form-control py-2 border-left-0 border" placeholder="Пароль">
+            <!-- {{form.username}} -->
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <input class="btn btn-primary" type="submit" value="Зарегистрировать">
+          </div>
+        </form>
+      </div>
+
+      <div class="mt-4">
+        <div class="d-flex justify-content-center links">
+          У вас ещё нет аккаунта? <a href="{% url 'account:register' %}" class="ml-2">Регистрация</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+{% endblock %}

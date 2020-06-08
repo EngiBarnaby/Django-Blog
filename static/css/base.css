@@ -8,6 +8,7 @@ body, html {
    background-color: #f2f2e2;
 }
 
+
 .footer {
     padding: 2.5rem 0;
     color: #999;
@@ -15,8 +16,11 @@ body, html {
     background-color: #e9dfff;
     border-top: .05rem solid #e5e5e5;
     width: 100%;
-    bottom: 0;
     display: block;
+}
+
+.mt-auto, .my-auto {
+    margin-top: auto !important;
 }
 
 .content {
@@ -41,11 +45,11 @@ body, html {
 }
 
 .post-nav a {
-  color:   #686865;
+  color: #686865;
 }
 
 .post-nav a:hover {
-  color :   #424240;
+  color : #424240;
 }
 
 .post-nav a {
@@ -64,4 +68,12 @@ body, html {
   font-size: 30px;
   font-weight: 800;
   font-family: 'Roboto', sans-serif;
+}
+
+.form-account {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    border: 4px double black;
 }
