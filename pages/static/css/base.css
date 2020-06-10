@@ -100,3 +100,19 @@ body, wrapper {
     margin: auto;
     border: 4px double black;
 }
+
+.asteriskField {
+    display: none;
+}
+
+ .tag {
+    padding: 5px 25px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    color: #777 !important; 
+    font-size: 0.75em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+}

@@ -1,0 +1,15 @@
+{% extends "pages/base.html" %}
+{% block title %}Поиск{% endblock %}
+
+{% block content %}
+  <div class="container d-flex justify-content-center mt-4">
+    <div class="row">
+      <div class="col">
+        <h3>Совпадений найдено {{ queryset.count }}</h3>
+            {% for item in queryset %}
+              <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

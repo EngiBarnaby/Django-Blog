@@ -1,13 +1,38 @@
 {% extends "pages/base.html" %}
 
-{% block title %}НАписатьстатью{% endblock %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Написатьстатью{% endblock %}
 
 {% block content %}
-  <div class="container">
-    <form action="" method="post">
-      {% csrf_token %}
-      {{ post_form.as_p }}
-      <input type="submit" value="Сохранить">
-    </form>
+  <div class="container mt-4 h-100">
+    <div class="row -flex justify-content-center">
+      <div class="col-6">
+        <form action="" method="post">
+          {% csrf_token %}
+              {{ post_form.title|as_crispy_field }}
+              {{ post_form.slug|as_crispy_field }}
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              {{ post_form.author|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4">
+              <div class="input-group mb-2">
+                {{post_form.category|as_crispy_field}}
+                <div class="input-group-append">
+                  <span class="btn" data-container="body" data-toggle="popover" data-placement="right" data-content="Поле категорий является необязательным">
+                    <i class="far fa-question-circle"></i></span>
+                </div>
+                <!-- <input type="email" name="username" class="form-control py-2 border-left-0 border" placeholder="Email"> -->
+              </div>
+            </div>
+          </div>
+          <input type="submit" value="Сохранить">
+          <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+        </form>
+    </div>
   </div>
+</div>
+
 {% endblock %}

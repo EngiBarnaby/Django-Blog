@@ -5,12 +5,32 @@ from django.forms import inlineformset_factory, modelformset_factory
 from .forms import PostForm
 from django.views.generic.base import View
 from django.forms.models import modelform_factory
+from django.db.models import Count, Q
 
+def search(request):
+    posts = Post.objects.all()
+    query = request.GET.get('main-search')
+    if query:
+        queryset = Post.objects.filter(title__icontains=query).distinct()
 
-def post_list(request):
-    all_post = Post.objects.all()
+    context = {"queryset" : queryset}
+    return render(request, "pages/post/search_result.html", context)
+
+def post_list(request, category_id=None, tag_id=None):
+    tag = None
+    category = None
+    posts = Post.objects.all()
     categories = Category.objects.all()
-    pages = Paginator(all_post, 8)
+
+    if tag_id:
+        tag = get_object_or_404(Tag, id=tag_id)
+        posts = Post.objects.filter(tags=tag)
+
+    if category_id:
+        category = get_object_or_404(Category, id=category_id)
+        posts = Post.objects.filter(category=category)
+
+    pages = Paginator(posts, 8)
 
     if "page" in request.GET:
         page_num = request.GET['page']
@@ -23,6 +43,7 @@ def post_list(request):
     return render(request, "pages/post/post_list.html", context)
 
 def post_create(request):
+
     if request.method == "GET":
         post_form = PostForm()
         return render(request, 'pages/post/post_create.html', {"post_form" : post_form})
