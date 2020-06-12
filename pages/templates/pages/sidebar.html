@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<aside class="col-lg-3 mt-4">
+    <!-- Widget [Search Bar Widget]-->
+    <!-- <div class="widget search">
+    <header>
+        <h3 class="h6">Search the blog</h3>
+    </header>
+    <form action="#" class="search-form">
+        <div class="form-group">
+        <input type="text" name="q" placeholder="What are you looking for?">
+        <button type="submit" class="submit"><i class="icon-search"></i></button>
+        </div>
+    </form>
+    </div> -->
+    <!-- Widget [Latest Posts Widget]        -->
+    <div class="widget latest-posts">
+    <header>
+        <h3 class="h6">Последние посты</h3>
+    </header>
+    <div class="blog-posts">
+        {% for post in most_recent %}
+        <a href="{{ post.get_absolute_url }}">
+            <div class="item d-flex align-items-center">
+            <div class="title"><strong>{{ post.title }}</strong>
+                <div class="d-flex align-items-center">
+                <div class="views"><i class="icon-eye"></i>{{ post.view_count }}</div>
+                <div class="comments"><p><i class="far fa-comment"></i>  {{ post.get_comment_count }}</p></div>
+                </div>
+            </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    <!-- Widget [All tags Widget]-->
+    <div class="widget tags">
+      <header>
+          <h3 class="h6">Тэги</h3>
+      </header>
+      <ul class="list-inline">
+        {% for tag in tags %}
+          <li class="list-inline-item">
+            <a href="{{ tag.get_absolute_url }}" class="tag">#{{ tag.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+</aside>

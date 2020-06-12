@@ -6,14 +6,16 @@
 
 {% block content %}
   <div class="container-fluid">
-    <form novalidate method="post">
+    <form novalidate method="post" action="">
       {% csrf_token %}
       {{ formset.management_form }}
       <div class="row">
           <div class="col-8 offset-md-3">
-            {{ formset|crispy }}
+            {% for form in formset %}
+                {{ form|crispy }}
+            {% endfor %}
           </div>
-      <input type="submit" name="submit" value="Добавить раздел" class="btn btn-primary col-2 offset-md-3">
+      <input type="submit" name="submit" value="Добавить раздел" class="btn btn-primary col-2 offset-md-3 mb-4">
       </div>
     </form>
   </div>

@@ -1,11 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, redirect
 from .models import *
 from django.core.paginator import Paginator
 from django.forms import inlineformset_factory, modelformset_factory
-from .forms import PostForm
+from .forms import PostForm, CommentForm, MceForm
 from django.views.generic.base import View
 from django.forms.models import modelform_factory
 from django.db.models import Count, Q
+
+
+def tinymce(request):
+    form = MceForm()
+    return render(request, "pages/post/test-tinymce.html", {"form":form})
 
 def search(request):
     posts = Post.objects.all()
@@ -20,7 +25,9 @@ def post_list(request, category_id=None, tag_id=None):
     tag = None
     category = None
     posts = Post.objects.all()
+    tags = Tag.objects.all()
     categories = Category.objects.all()
+    most_recent = Post.objects.order_by('-publish')[:3]
 
     if tag_id:
         tag = get_object_or_404(Tag, id=tag_id)
@@ -39,10 +46,12 @@ def post_list(request, category_id=None, tag_id=None):
 
     page = pages.get_page(page_num)
 
-    context = {'all_post' : page.object_list, 'page' : page, "categories" : categories}
+    context = {'all_post' : page.object_list, 'page' : page, "categories" : categories,
+        "most_recent" : most_recent, "tags" : tags}
     return render(request, "pages/post/post_list.html", context)
 
 def post_create(request):
+
 
     if request.method == "GET":
         post_form = PostForm()
@@ -54,7 +63,8 @@ def post_create(request):
             return redirect("post:post_update", slug=request.POST["slug"])
         else:
             post_form = PostForm(request.POST)
-            return render(request, "pages/post/post_create.html", {"post_form" : post_form})
+            context = {"post_form" : post_form}
+            return render(request, "pages/post/post_create.html", context)
 
 
 def post_update(request, slug):
@@ -74,7 +84,19 @@ def post_update(request, slug):
 
 def post_detail(request, slug):
     post = Post.objects.get(slug__iexact=slug)
-    return render(request, "pages/post/post_detail.html", {"post" : post})
+    form = CommentForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+            return redirect(reverse("post:post_detail", kwargs={
+                'slug': post.slug
+            }))
+
+
+    context = {"post" : post, "form" : form}
+    return render(request, "pages/post/post_detail.html", context)
 
 
 def post_delete(request, slug):

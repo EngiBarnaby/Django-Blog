@@ -1,5 +1,5 @@
 {% extends 'pages/base.html' %}
-
+{% load static %}
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -7,8 +7,8 @@
   <div class="container-fluid content-body">
     <div class="row">
       <!-- Навигация статьй -->
-      <div class="col-2">
-        <ul class="post-nav mt-4">
+      <div class="col-3">
+        <ul class="post-nav justify-content-start side-nav" data-spy="scroll">
           {% for link in post.paragraphs.all %}
             <li class="mt-4">
               <a href="#{{ link.subtitle }}">{{ link.subtitle }}</a>
@@ -17,7 +17,7 @@
         </ul>
       </div>
       <!-- Основной контент -->
-      <div class="col-8 offset-md-1 mt-4">
+      <div class="col-8 justify-content-end ml-3 mt-4">
         <div class="container post-header mb-4">
           <h1>{{ post.title }}</h1>
         </div>
@@ -25,6 +25,30 @@
           <h4 class="font-weight-bold" id="{{ paragraph.subtitle }}">{{ paragraph.subtitle }}</h4>
           <p class="font-weight-normal">{{ paragraph.subtext|safe }}</p>
         {% endfor %}
+      </div>
+      <div class="col-6 offset-md-4 mt-4">
+        {% for comment in post.get_comments %}
+        <div class="post-comments">
+          <div class="comment">
+            <div class="comment-header d-flex justify-content-between">
+              <div class="user d-flex align-items-center">
+                <div class="image mr-2"><img src="{% static 'img/capybara.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="title">
+                  <strong>{{ comment.user.username }}</strong>
+                  <span class="date">{{ comment.timestamp|timesince }} ago</span></div>
+              </div>
+            </div>
+            <div class="comment-body">
+              <p>{{ comment.content }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <form  action="" method="post" class="mb-4">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit" class="btn btn-secondary mt-2" value="Оставить комментарий">
+        </form>
       </div>
     </div>
   </div>

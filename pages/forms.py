@@ -1,5 +1,26 @@
 from django import forms
 from .models import *
+from tinymce.widgets import TinyMCE
+
+
+
+
+class MceForm(forms.ModelForm):
+    class Meta:
+        model = Mce
+        fields = ('title', 'text',)
+
+class CommentForm(forms.ModelForm):
+    content = forms.CharField(label='Ваш комментарий', widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'placeholder': 'Ваш комментарий...',
+        'id': 'usercomment',
+        'rows': '4',
+    }))
+
+    class Meta:
+        model = Comment
+        fields = ('content',)
 
 
 class PostForm(forms.ModelForm):

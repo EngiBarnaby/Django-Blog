@@ -8,8 +8,9 @@ from ckeditor.widgets import CKEditorWidget
 class ArticleContentInline(admin.StackedInline):
     model = ArticleContent
 
+admin.site.register(Mce)
 admin.site.register(Tag)
-
+admin.site.register(Comment)
 # @admin.register(Tag)
 # class TagsAdmin(admin.ModelAdmin):
 #     list_display = ("name")
