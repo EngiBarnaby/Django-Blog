@@ -1,8 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserForm
+from .forms import CustomUserForm, CustomUser
 from django.contrib import messages
+
+
+def settings_profile(request):
+    current_user = request.user.customuser
+    form = CustomUser(instance=current_user)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES,instance=customer)
+        if form.is_valid():
+                form.save()
+    return render(request, "pages/test.html", {"form" : form})
 
 
 def register_user(request):

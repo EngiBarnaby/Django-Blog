@@ -5,6 +5,7 @@ from tinymce.widgets import TinyMCE
 
 
 
+
 class MceForm(forms.ModelForm):
     class Meta:
         model = Mce

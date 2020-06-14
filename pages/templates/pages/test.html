@@ -1,0 +1,30 @@
+{% extends "pages/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Тест профиля{% endblock %}
+
+{% block content %}
+
+<style>
+	.profile-pic{
+		max-width: 200px;
+		max-height:200px;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+</style>
+
+<div class="container">
+  <h1>{{ user.username }}</h1>
+	<img class="profile-pic" src="{{request.user.customuser.profile_picture.url}}" >
+	<div class="container">
+		<form class="" action="" method="post">
+				{% csrf_token %}
+				{{ form|crispy }}
+		</form>
+	</div>
+</div>
+
+{% endblock %}

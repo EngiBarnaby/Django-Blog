@@ -6,6 +6,9 @@ from ckeditor.fields import RichTextField
 from django.urls import reverse
 from tinymce.models import HTMLField
 
+
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=50)
 

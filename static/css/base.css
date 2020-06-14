@@ -5,7 +5,7 @@ body, html {
    width: 100%;
    /* font-family: 'Poppins', sans-serif; */
    color: #222;
-   background-color: #f2f2e2;
+   background-color: #FAFAFA;
 }
 
 body, wrapper {
@@ -15,13 +15,26 @@ body, wrapper {
 /* .blog-header {
 } */
 
+.nav-main {
+  background-color: #FAFAFA;
+}
+
 #categories {
       line-height: 1;
       border-top: 1px solid #e5e5e5;
 }
 
+.latest-posts a  {
+  color:  #50504f;
+  direction: none;
+}
+
 .title-brand  {
   font-size: 50px;
+}
+
+.title-brand a:hover {
+  text-decoration: none;
 }
 
 .navbar-brand a {
@@ -44,13 +57,13 @@ body, wrapper {
 }
 
 .content {
-  background-color: #f2f2e2;
+  background-color:  #FAFAFA;
   min-height: 100%;
 }
 
 
 #post-item {
-  background-color: #f2f2e2;
+  background-color:  #FAFAFA;
 }
 
 .content-body p {
@@ -62,6 +75,13 @@ body, wrapper {
 
  li {
   list-style: none;
+}
+
+.side-nav {
+    position: sticky;
+    top: 4rem;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
 }
 
 .post-nav a {
@@ -78,10 +98,6 @@ body, wrapper {
     line-height: 23px;
 }
 
-.main-nav {
-  background-color:#cecec5;
-  height: 75px;
-}
 
 #post-item h3 {
   color : #031b4e;
@@ -105,7 +121,7 @@ body, wrapper {
     display: none;
 }
 
- .tag {
+.tag {
     padding: 5px 25px;
     border: 1px solid #ddd;
     margin: 5px 0;
@@ -116,6 +132,19 @@ body, wrapper {
     text-decoration: none;
     border-radius: 50px;
 }
+
+aside .tag {
+  padding: 2px 15px;
+  border: 1px solid #ddd;
+  margin: 5px 0;
+  color: #777 !important;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+}
+
 
 .post-comments .title::after {
   display: none;
