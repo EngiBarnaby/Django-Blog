@@ -156,6 +156,12 @@ aside .tag {
     height: 40px;
 }
 
+.avatar-img img {
+  max-width: 40px;
+  min-width: 40px;
+  height: 40px;
+}
+
 .post-comments strong {
   display: block;
   color: #555;

@@ -1,0 +1,51 @@
+{% extends "pages/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Тест профиля{% endblock %}
+
+{% block content %}
+
+<style>
+	.profile-pic{
+		max-width: 300px;
+		max-height:300px;
+		margin: 0 auto;
+	}
+</style>
+
+<div class="container">
+	<div class="row">
+		<div class="col-4-md text-center">
+				<h1>{{ profile.user.username }}</h1>
+				{% if profile.profile_picture %}
+					<img class="profile-pic mb-2" src="{{ profile.profile_picture.url }}">
+				{% else %}
+					<img class="profile-pic mb-2" src="{% static 'images/profile2.png' %}">
+				{% endif %}
+				<br>
+				{% if profile.user.username == request.user.username %}
+        	<a class="btn btn-sm btn-outline-secondary" href="{% url 'account:settings_profile' %}">Изменить профиль</a>
+				{% endif %}
+		</div>
+		<div class="col-6-md offset-md-2 mt-5">
+			<div class="container">
+        <p>Имя {{ profile.first_name }}</p>
+        <p>Фамилия {{ profile.last_name }}</p>
+        <p>Email {{ profile.email }}</p>
+        <p>Дата регистраций {{ profile.date_created }}</p>
+				<p>Количество комментариев на сайте {{ profile.get_comments_count }}</p>
+				<p>Написано постов {{ profile.get_post_count }}</p>
+			</div>
+			<!-- <div class="container">
+        <p>{{ user.customuser.first_name }}</p>
+        <p>{{ user.customuser.last_name }}</p>
+        <p>{{ user.customuser.email }}</p>
+        <p>Дата регистраций {{ user.customuser.date_created }}</p>
+			</div> -->
+		</div>
+	</div>
+</div>
+
+{% endblock %}

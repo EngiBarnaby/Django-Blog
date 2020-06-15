@@ -26,7 +26,7 @@ def post_list(request, category_id=None, tag_id=None):
     tag = None
     category = None
     posts = Post.objects.all()
-    tags = Tag.objects.all()
+    tags = Tag.objects.all()[:42]
     categories = Category.objects.all()
     most_recent = Post.objects.order_by('-publish')[:3]
 
@@ -95,6 +95,8 @@ def post_detail(request, slug):
                 'slug': post.slug
             }))
 
+    post.plus_view()
+    post.save()
 
     context = {"post" : post, "form" : form}
     return render(request, "pages/post/post_detail.html", context)

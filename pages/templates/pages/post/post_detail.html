@@ -32,7 +32,11 @@
           <div class="comment">
             <div class="comment-header d-flex justify-content-between">
               <div class="user d-flex align-items-center">
-                <div class="image mr-2"><img src="{% static 'img/capybara.jpg' %}" alt="..." class="img-fluid rounded-circle"></div>
+                <div class="image mr-2">
+                  <a href="{% url 'account:profile_user' username=comment.user.username  %}">
+                    <img src="{{ comment.user.customuser.profile_picture.url }}" alt="..." class="img-fluid rounded-circle">
+                  </a>
+                </div>
                 <div class="title">
                   <strong>{{ comment.user.username }}</strong>
                   <span class="date">{{ comment.timestamp|timesince }} ago</span></div>

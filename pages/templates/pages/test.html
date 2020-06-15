@@ -16,14 +16,31 @@
 	}
 </style>
 
-<div class="container">
-  <h1>{{ user.username }}</h1>
-	<img class="profile-pic" src="{{request.user.customuser.profile_picture.url}}" >
-	<div class="container">
-		<form class="" action="" method="post">
-				{% csrf_token %}
-				{{ form|crispy }}
-		</form>
+<div class="container mb-5">
+	<div class="row">
+		<div class="col-4-md">
+			<div class="container-fluid text-center">
+				<h1>{{ user.username }}</h1>
+				{% if request.user.customuser.profile_picture %}
+					<a href="{% url 'account:profile_user' username=request.user.username %}">
+						<img src="{{request.user.customuser.profile_picture.url}}" alt="..." class="img-fluid rounded-circle">
+					</a>
+				{% else %}
+					<a href="{% url 'account:profile_user' username=request.user.username %}">
+						<img class="profile-pic mb-2" src="{% static 'images/profile2.png' %}">
+					</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-6-md">
+			<div class="container">
+				<form action="" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						{{ form|crispy }}
+						<input type="submit"  value="Сохранить изменения" class="btn btn-secondary">
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 

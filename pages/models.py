@@ -59,6 +59,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null=True, blank=True)
     tags = models.ManyToManyField(Tag, related_name='tags')
+    view_count = models.IntegerField(default = 0)
 
     def __str__(self):
         return self.title
@@ -70,6 +71,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("post:post_detail", args=[self.slug])
+
+    def plus_view(self):
+         self.view_count += 1
+         return self.view_count
 
     @property
     def get_comments(self):

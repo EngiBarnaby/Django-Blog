@@ -1,18 +1,31 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserForm, CustomUser
+from .forms import CustomUserForm, CustomUserSettingsForm
 from django.contrib import messages
+from django.contrib.auth.models import User
+from .models import CustomUser
 
+
+
+
+
+def profile_user(request, username):
+    user = User.objects.get(username=username)
+    profile = CustomUser.objects.get(user=user)
+    context = {"profile" : profile}
+    return render(request, "account/profile_user.html", context)
 
 def settings_profile(request):
     current_user = request.user.customuser
-    form = CustomUser(instance=current_user)
+    form = CustomUserSettingsForm(instance=current_user)
 
     if request.method == 'POST':
-        form = CustomerForm(request.POST, request.FILES,instance=customer)
+        form = CustomUserSettingsForm(request.POST, request.FILES, instance=current_user)
         if form.is_valid():
-                form.save()
+            form.save()
+            return redirect(reverse("account:profile_user", kwargs={'username': current_user.name}))
+
     return render(request, "pages/test.html", {"form" : form})
 
 
@@ -25,7 +38,8 @@ def register_user(request):
         if request.method == "POST":
             form = CustomUserForm(request.POST)
             if form.is_valid():
-                form.save()
+                user = form.save()
+                # CustomUser.objects.create(user=new_user)
                 return redirect("account:register_done")
 
         contex = {"form" : form}

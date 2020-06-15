@@ -5,7 +5,7 @@ from django import forms
 
 from .models import *
 
-class CustomUser(ModelForm):
+class CustomUserSettingsForm(ModelForm):
 	class Meta:
 		model = CustomUser
 		fields = '__all__'
