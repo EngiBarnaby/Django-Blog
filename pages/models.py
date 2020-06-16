@@ -4,7 +4,6 @@ from django.utils import timezone
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from django.urls import reverse
-from tinymce.models import HTMLField
 
 
 
