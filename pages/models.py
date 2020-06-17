@@ -4,12 +4,12 @@ from django.utils import timezone
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from django.urls import reverse
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -49,8 +49,7 @@ class Mce(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    # subtitle = models.CharField(max_length=100)
-    # subtext = models.TextField()
+    title_text = models.TextField(max_length=1000, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
     slug = models.SlugField(unique=True)
     image = models.ImageField(null=True, blank=True)
@@ -86,7 +85,7 @@ class Post(models.Model):
 class ArticleContent(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="paragraphs")
     subtitle = models.CharField(max_length=100)
-    subtext = RichTextField()
+    subtext = RichTextUploadingField(blank=True, null=True)
 
     class Meta:
         ordering = ("id",)

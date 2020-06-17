@@ -24,7 +24,7 @@
               {% endfor %}
               </ul>
             </div>
-            <p>{{ paragraph.subtext|truncatewords:49|safe }}</p>
+            <p>{{ post.title_text }}</p>
             <div class="d-flex justify-content-end col-11">
               <p><i class="far fa-comment"></i> {{ post.get_comments.count }}
                   <i class="far fa-eye"></i>  {{ post.view_count }}

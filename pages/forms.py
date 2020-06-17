@@ -28,14 +28,15 @@ class PostForm(forms.ModelForm):
         super(PostForm, self).__init__(*args, **kwargs)
         # self.title['title'].widget.attrs['placeholder'] = self.instance.placeholder
         self.fields['title'].widget.attrs['placeholder'] = 'Заголовок'
+        self.fields['title_text'].widget.attrs['placeholder'] = 'Краткий текст про статью'
         self.fields['slug'].widget.attrs['placeholder'] = 'Название в url строке'
 
     class Meta:
         model = Post
-        fields = ['title', 'slug', 'author', 'category']
+        fields = ['title', "title_text",'slug','category']
         labels = {
             "title" : "Заголовок",
+            "title_text" : "Краткий текст",
             "slug" : "Слаг",
-            "author" : "Автор",
             "category" : "Категория"
         }
