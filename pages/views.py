@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404, redirect
-from .models import *
 from django.core.paginator import Paginator
 from django.forms import inlineformset_factory, modelformset_factory
-from .forms import PostForm, CommentForm, MceForm
 from django.views.generic.base import View
 from django.forms.models import modelform_factory
 from django.db.models import Count, Q
+from django.contrib.auth.decorators import login_required
 
+
+from .models import *
+from .forms import PostForm, CommentForm, MceForm
+from .decorators import unauthenticated_user, allowed_users, admin_only
 
 
 def tinymce(request):
@@ -17,8 +20,9 @@ def search(request):
     posts = Post.objects.all()
     query = request.GET.get('main-search')
     if query:
-        queryset = Post.objects.filter(title__icontains=query).distinct()
-
+        posts = Post.objects.filter(title__icontains=query).distinct()
+    else:
+        return redirect("post:post_list")
     context = {"queryset" : queryset}
     return render(request, "pages/post/search_result.html", context)
 
@@ -51,9 +55,9 @@ def post_list(request, category_id=None, tag_id=None):
         "most_recent" : most_recent, "tags" : tags}
     return render(request, "pages/post/post_list.html", context)
 
+@login_required(login_url='account:login')
+@allowed_users(allowed_roles=['visitor', 'admin'])
 def post_create(request):
-
-
     if request.method == "GET":
         post_form = PostForm()
         return render(request, 'pages/post/post_create.html', {"post_form" : post_form})
@@ -68,7 +72,8 @@ def post_create(request):
             context = {"post_form" : post_form}
             return render(request, "pages/post/post_create.html", context)
 
-
+@login_required(login_url='account:login')
+@allowed_users(allowed_roles=['admin'])
 def post_update(request, slug):
     post = Post.objects.get(slug__iexact=slug)
     PostFormset = inlineformset_factory(Post, ArticleContent, fields = ('subtitle', 'subtext',), extra = 1)
@@ -102,31 +107,32 @@ def post_detail(request, slug):
     context = {"post" : post, "form" : form}
     return render(request, "pages/post/post_detail.html", context)
 
-
+@login_required(login_url='account:login')
+@allowed_users(allowed_roles=['admin'])
 def post_delete(request, slug):
     article = Post.objects.get(slug__iexact=slug)
     article.delete()
     return redirect("post:post_list")
 
-class PostUpdate(View):
-    post = None
-
-    def get_type_content(self, type_name, *args, **kwargs):
-        Form = modelform_factory(type_name, exclude=('what',))
-
-    def dispatch(self, request, slug, type_name=ArticleContent):
-        self.post = get_object_or_404(Post, slug__iexact=slug)
-        return super(PostUpdate,self).dispatch(request, slug, type_name)
-
-
-    def get(self, request, slug, type_content=ArticleContent):
-        PostFormset = self.get_type_content(type_content)
-        form = self.get_type_content(type_content, instance=self.post)
-        context = {"formset" : form}
-        return render(request, "pages/post/post_update2.html", context)
-
-    def post(self, request, post_slug, type_content):
-        pass
+# class PostUpdate(View):
+#     post = None
+#
+#     def get_type_content(self, type_name, *args, **kwargs):
+#         Form = modelform_factory(type_name, exclude=('what',))
+#
+#     def dispatch(self, request, slug, type_name=ArticleContent):
+#         self.post = get_object_or_404(Post, slug__iexact=slug)
+#         return super(PostUpdate,self).dispatch(request, slug, type_name)
+#
+#
+#     def get(self, request, slug, type_content=ArticleContent):
+#         PostFormset = self.get_type_content(type_content)
+#         form = self.get_type_content(type_content, instance=self.post)
+#         context = {"formset" : form}
+#         return render(request, "pages/post/post_update2.html", context)
+#
+#     def post(self, request, post_slug, type_content):
+#         pass
 
 
 # instances = formset.save(commit=False)

@@ -4,18 +4,24 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserForm, CustomUserSettingsForm
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+from pages.decorators import *
 from .models import CustomUser
 
 
 
 
-
+@login_required(login_url='account:login')
+@allowed_users(allowed_roles=['visitor', 'admin'])
 def profile_user(request, username):
     user = User.objects.get(username=username)
     profile = CustomUser.objects.get(user=user)
     context = {"profile" : profile}
     return render(request, "account/profile_user.html", context)
 
+@login_required(login_url='account:login')
+@allowed_users(allowed_roles=['visitor'])
 def settings_profile(request):
     current_user = request.user.customuser
     form = CustomUserSettingsForm(instance=current_user)
@@ -28,7 +34,7 @@ def settings_profile(request):
 
     return render(request, "pages/test.html", {"form" : form})
 
-
+@unauthenticated_user
 def register_user(request):
     if request.user.is_authenticated:
         return redirect("post:post_list")
@@ -45,9 +51,12 @@ def register_user(request):
         contex = {"form" : form}
         return render(request, 'account/register.html', contex)
 
+@unauthenticated_user
 def register_done(request):
     return render(request, "account/register_done.html", {})
 
+
+@unauthenticated_user
 def login_user(request):
     if request.user.is_authenticated:
         return redirect("post:post_list")
