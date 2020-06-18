@@ -137,6 +137,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
@@ -150,6 +153,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 CKEDITOR_UPLOAD_PATH = ('upload')
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'engipython@gmail.com'
+EMAIL_HOST_PASSWORD = '26Fe55847'
+
 
 # Для tinymce
 # TINYMCE_DEFAULT_CONFIG = {
