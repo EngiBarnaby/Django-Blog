@@ -12,8 +12,10 @@
             <a href="{% url 'post:post_detail' slug=post.slug %}"><h3>{{ post.title }}</h3></a>
             <p>
               Опубликовано {{ post.publish }}  Автор {{ post.author }}.
+            {% if request.user.is_authenticated %}
             <a href="{% url 'post:post_update' slug=post.slug %}">Изменить</a>
             <a href="{% url 'post:post_delete' slug=post.slug %}">Удалить</a>
+            {% endif %}
             </p>
             <div class="post-tags container-fluid">
               <ul class="list-inline">
