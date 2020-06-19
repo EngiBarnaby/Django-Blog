@@ -11,12 +11,12 @@ class MceForm(forms.ModelForm):
         fields = ('title', 'text',)
 
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(label='Ваш комментарий', widget=forms.Textarea(attrs={
-        'class': 'form-control',
-        'placeholder': 'Ваш комментарий...',
-        'id': 'usercomment',
-        'rows': '4',
-    }))
+    # content = forms.CharField(label='Ваш комментарий', widget=forms.Textarea(attrs={
+    #     'class': 'form-control',
+    #     'placeholder': 'Ваш комментарий...',
+    #     'id': 'usercomment',
+    #     'rows': '4',
+    # }))
 
     class Meta:
         model = Comment

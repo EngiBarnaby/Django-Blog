@@ -43,13 +43,14 @@
               </div>
             </div>
             <div class="comment-body">
-              <p>{{ comment.content }}</p>
+              <p>{{ comment.content|safe }}</p>
             </div>
           </div>
         </div>
         {% endfor %}
         <form  action="" method="post" class="mb-4">
           {% csrf_token %}
+          {{ form.media }}
           {{ form }}
           <input type="submit" class="btn btn-secondary mt-2" value="Оставить комментарий">
         </form>

@@ -162,6 +162,34 @@ EMAIL_HOST_USER = 'engipython@gmail.com'
 EMAIL_HOST_PASSWORD = '26Fe55847'
 
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format', 'Font',],
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink', 'Image', 'CodeSnippet'],
+            ['RemoveFormat', 'Source'],
+            ['Undo', 'Redo'],
+            ['Smiley', 'SpecialChar'],
+        ],
+        "extraPlugins" : "codesnippet",
+    },
+    'comment-user':
+        {
+        'height': 200,
+        'width': 700,
+        'toolbar': 'Special',
+         'toolbar_Special':
+             [
+                 ['Bold', 'Italic', 'Blockquote'],
+                 ['Link', 'Unlink', 'Image', 'CodeSnippet'],
+             ],
+             "extraPlugins" : "codesnippet",
+         }
+}
+
 # Для tinymce
 # TINYMCE_DEFAULT_CONFIG = {
 #     'cleanup_on_startup': True,
