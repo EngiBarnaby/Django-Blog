@@ -12,6 +12,7 @@
       <div class="row">
           <div class="col-8 offset-md-3">
             {% for form in formset %}
+                {{ form.media }}
                 {{ form|crispy }}
             {% endfor %}
           </div>
