@@ -5,17 +5,17 @@ from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
+from taggit.managers import TaggableManager
 
 
-
-class Tag(models.Model):
-    name = models.CharField(max_length=50, null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse("post:post_list_by_tag", args=[self.id])
+# class Tag(models.Model):
+#     name = models.CharField(max_length=50, null=True, blank=True, unique=True)
+#
+#     def __str__(self):
+#         return self.name
+#
+#     def get_absolute_url(self):
+#         return reverse("post:post_list_by_tag", args=[self.id])
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -48,16 +48,25 @@ class Mce(models.Model):
         return self.title
 
 class Post(models.Model):
+    STATUS_CHOICES = (
+        ('draft', 'Черновой вариант'),
+        ('published', 'Опубликован'),
+    )
     title = models.CharField(max_length=100)
     title_text = models.TextField(max_length=1000, null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
     slug = models.SlugField(unique=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='images_posts')
     publish = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, related_name='tags')
+    # tags = models.ManyToManyField(Tag, related_name='tags')
     view_count = models.IntegerField(default = 0)
+    post_status = models.CharField(max_length=20,
+                                    choices=STATUS_CHOICES,
+                                    default='draft', blank=True, null=True)
+
+    tags = TaggableManager(blank=True)
 
     def __str__(self):
         return self.title

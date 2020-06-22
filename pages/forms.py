@@ -2,8 +2,10 @@ from django import forms
 from .models import *
 
 
-
-
+# class TagForm(forms.ModelForm):
+#     class Meta:
+#         model = Tag
+#         fields = ('name',)
 
 class MceForm(forms.ModelForm):
     class Meta:
@@ -33,10 +35,12 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', "title_text",'slug','category']
+        fields = ['title', "title_text",'slug','category', 'tags', 'post_status', 'image']
         labels = {
             "title" : "Заголовок",
             "title_text" : "Краткий текст",
             "slug" : "Слаг",
-            "category" : "Категория"
+            "category" : "Категория",
+            "tags" : "Тэги",
+            "post_status" : "Статус статьй",
         }

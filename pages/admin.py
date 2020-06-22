@@ -10,7 +10,7 @@ class ArticleContentInline(admin.StackedInline):
 
 
 admin.site.register(Mce)
-admin.site.register(Tag)
+# admin.site.register(Tag)
 admin.site.register(Comment)
 admin.site.register(ArticleContent)
 # @admin.register(Tag)
