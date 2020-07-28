@@ -4,7 +4,6 @@ from django.utils import timezone
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from django.urls import reverse
-from tinymce.models import HTMLField
 
 
 
@@ -42,7 +41,6 @@ class Comment(models.Model):
 
 class Mce(models.Model):
     title = models.CharField(max_length=100)
-    # text = HTMLField()
     text = RichTextField()
 
     def __str__(self):

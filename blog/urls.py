@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('tinymce/', include('tinymce.urls')),
     path('', include("pages.urls", namespace="post")),
     path('account/', include('account.urls', namespace="account")),
     path('admin/', admin.site.urls),
